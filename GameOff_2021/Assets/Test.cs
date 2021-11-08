@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    public enum enemigos {limo, avispa, murcielago, esqueleto};
+    public enum enemigos {limo, avispa, araña, murcielago, esqueleto};
 
     public enemigos tipoEnemigo = enemigos.limo;
 }
