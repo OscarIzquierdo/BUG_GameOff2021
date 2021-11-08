@@ -25,12 +25,6 @@ public class AttackTurn : MonoBehaviour
         this.enabled = false;
     }
 
-    private void Start()
-    {
-        playerHPFill.fillAmount = 1f;
-        enemyHPFill.fillAmount = 1f;
-    }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -64,6 +58,7 @@ public class AttackTurn : MonoBehaviour
     {
         enemy.transform.position = new Vector2(-3, -.25f);
         EStats.EnemyHP -= PStats.TotalATK - EStats.EnemyDEF;
+        enemyHPFill = GameObject.Find("E1_HP_FG").GetComponent<Image>();
         enemyHPFill.fillAmount = EStats.EnemyHP / EStats.EnemyMAXHP;
         player.transform.position = new Vector2(0, .25f);
         turn.PlayerTurn = false;
@@ -73,6 +68,7 @@ public class AttackTurn : MonoBehaviour
     {
         player.transform.position = new Vector2(3, .25f);
         PStats.PlayerHP -= EStats.EnemyATK - PStats.PlayerDEF;
+        playerHPFill = GameObject.Find("P_HP_FG").GetComponent<Image>();
         playerHPFill.fillAmount = PStats.PlayerHP / PStats.PlayerMAXHP;
         enemy.transform.position = new Vector2(0, -.25f);
         turn.PlayerTurn = true;
