@@ -104,6 +104,11 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    void SkeletonMageBehaviour()
+    {
+
+    }
+
     public void AttackAnimationEnded()
     {
         animator.SetBool("Attack", false);
