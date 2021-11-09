@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W) && jumpCount > 0)
         {
+            GetComponent<Animator>().SetBool("Jump", true);
             rb2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumpCount--;
         }
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor")
         {
+            GetComponent<Animator>().SetBool("Jump", false);
             jumpCount = jumpMax;
         }
     }
