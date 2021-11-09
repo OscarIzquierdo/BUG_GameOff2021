@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public enum enemies {slime, bee, spider, bat, skeleton_base};
+    public enum enemies {slime, bee, spider, bat, skeleton_base, skeleton_mage};
 
     public enemies enemyType;
 
@@ -47,6 +47,10 @@ public class EnemyBehaviour : MonoBehaviour
         else if (enemyType == enemies.skeleton_base)
         {
             Debug.Log("Esqueleto");
+        }
+        else if (enemyType == enemies.skeleton_mage)
+        {
+            Debug.Log("Esqueleto Mago");
         }
     }
 
