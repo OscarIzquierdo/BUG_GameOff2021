@@ -471,6 +471,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1544245863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1544245864}
+  m_Layer: 0
+  m_Name: MageObjective
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1544245864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544245863}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.29, y: -0.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1967544326}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1563811609
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,6 +1578,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1716493134}
+  - {fileID: 1544245864}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1719,7 +1750,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!114 &2051689789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1735,10 +1766,12 @@ MonoBehaviour:
   enemyType: 5
   moveSpeed: 0
   playerIsInRange: 0
-  magicSignal: {fileID: 0}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
+  magicSignalPrefab: {fileID: 93563551255233775, guid: 712287150d3d2bb48b61c5355ca4f486,
+    type: 3}
+  fireColumnPrefab: {fileID: 8269166713785704897, guid: 72af53819c9cc9f4193a579e981f1e94,
+    type: 3}
+  castTimeStopFollow: 4
+  maxCastTime: 5
 --- !u!95 &2051689790
 Animator:
   serializedVersion: 3

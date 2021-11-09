@@ -14,9 +14,18 @@ public class EnemyBehaviour : MonoBehaviour
     BoxCollider2D boxCol;
     Animator animator;
     [SerializeField] bool playerIsInRange;
-    [SerializeField] GameObject magicSignal;
-    GameObject player;
+    [SerializeField] GameObject magicSignalPrefab;
+    private GameObject magicSignal;
+    GameObject mageObjective;
+    [SerializeField] GameObject fireColumnPrefab;
+    private GameObject fireColumn;
 
+    float castTime;
+    [SerializeField] float castTimeStopFollow;
+    [SerializeField] float maxCastTime;
+
+    bool canAttack = true;
+    bool isCasting = false;
     int layerMask;
 
     public bool PlayerIsInRange { get => playerIsInRange; set => playerIsInRange = value; }
@@ -28,8 +37,9 @@ public class EnemyBehaviour : MonoBehaviour
         boxCol = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         PlayerIsInRange = false;
-        player = GameObject.FindGameObjectWithTag("Player");
+        mageObjective = GameObject.Find("MageObjective");
         layerMask = LayerMask.GetMask("Floor");
+        
     }
 
     private void FixedUpdate()
@@ -114,13 +124,34 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (PlayerIsInRange)
         {
-            animator.SetBool("RangedAttack", true);
-            RaycastHit2D hit = Physics2D.Raycast(player.transform.position, -Vector2.up, Mathf.Infinity, layerMask);
-            if(hit.collider != null && hit.collider.tag == "Floor")
-            {
-                Instantiate(magicSignal, hit.transform.position, Quaternion.identity);
+           
+            
+            RaycastHit2D hit = Physics2D.Raycast(mageObjective.transform.position, -Vector2.up, Mathf.Infinity, layerMask, -Mathf.Infinity, Mathf.Infinity);
+
+            if(magicSignal != null)
+            {              
+                castTime += Time.fixedDeltaTime;
+
+                if(castTime <= castTimeStopFollow)
+                {
+                    magicSignal.transform.position = new Vector2(mageObjective.transform.position.x, magicSignal.transform.position.y);
+                }
+                if (castTime >= maxCastTime)
+                {
+                    castTime = 0.0f;
+                    animator.SetBool("RangedAttack", false);
+                    FireColumn();
+                    magicSignal.transform.position = new Vector2(magicSignal.transform.position.x, magicSignal.transform.position.y);
+                }
             }
 
+            if (hit.collider != null && hit.collider.tag == "Floor" && !isCasting && fireColumn == null && canAttack)
+            {
+                animator.SetBool("RangedAttack", true);
+                magicSignal = Instantiate(magicSignalPrefab, hit.point, Quaternion.identity);
+                canAttack = false;
+            }
+            Debug.DrawRay(mageObjective.transform.position, -Vector2.up, Color.green);    
         }
     }
 
@@ -130,6 +161,28 @@ public class EnemyBehaviour : MonoBehaviour
         moveSpeed = initMoveSpeed;
     }
 
+    public void Casting()
+    {
+        isCasting = true;
+    }
+
+    public void StopCasting()
+    {
+        isCasting = false;
+    }
+
+    public void FireColumn()
+    {
+        fireColumn = Instantiate(fireColumnPrefab, magicSignal.transform.position, Quaternion.identity);
+        Destroy(magicSignal.gameObject);
+        Destroy(fireColumn, 3.0f);
+        Invoke("NewAttack", 4.5f);
+    }
+
+    private void NewAttack()
+    {
+        canAttack = true;
+    }
 
     private bool isFacingRight()
     {
