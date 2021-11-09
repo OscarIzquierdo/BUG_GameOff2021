@@ -2282,3 +2282,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movSpeed: 3
   jumpForce: 50
+  jumpMax: 1
