@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 1578237381}
   - component: {fileID: 1578237380}
   - component: {fileID: 1578237379}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Background
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -1735,6 +1735,10 @@ MonoBehaviour:
   enemyType: 5
   moveSpeed: 0
   playerIsInRange: 0
+  magicSignal: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!95 &2051689790
 Animator:
   serializedVersion: 3

@@ -14,8 +14,10 @@ public class EnemyBehaviour : MonoBehaviour
     BoxCollider2D boxCol;
     Animator animator;
     [SerializeField] bool playerIsInRange;
-
+    [SerializeField] GameObject magicSignal;
     GameObject player;
+
+    int layerMask;
 
     public bool PlayerIsInRange { get => playerIsInRange; set => playerIsInRange = value; }
 
@@ -27,6 +29,7 @@ public class EnemyBehaviour : MonoBehaviour
         animator = GetComponent<Animator>();
         PlayerIsInRange = false;
         player = GameObject.FindGameObjectWithTag("Player");
+        layerMask = LayerMask.GetMask("Floor");
     }
 
     private void FixedUpdate()
@@ -112,8 +115,11 @@ public class EnemyBehaviour : MonoBehaviour
         if (PlayerIsInRange)
         {
             animator.SetBool("RangedAttack", true);
-
-            animator.SetBool("RangedAttack", false);
+            RaycastHit2D hit = Physics2D.Raycast(player.transform.position, -Vector2.up, Mathf.Infinity, layerMask);
+            if(hit.collider != null && hit.collider.tag == "Floor")
+            {
+                Instantiate(magicSignal, hit.transform.position, Quaternion.identity);
+            }
 
         }
     }
