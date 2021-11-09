@@ -7,8 +7,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float movSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] int jumpMax;
+    [SerializeField] int maxHP;
     [SerializeField] GameObject swordHitBox;
+    [SerializeField] GameObject lastCheckpoint;
     Rigidbody2D rb2D;
+    private int currentHP;
     private int jumpCount;
     private float initMovSpeed;
 
@@ -18,6 +21,7 @@ public class PlayerController : MonoBehaviour
         jumpCount = jumpMax;
         initMovSpeed = movSpeed;
         swordHitBox.SetActive(false);
+        currentHP = maxHP;
     }
 
     void FixedUpdate()
@@ -44,6 +48,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             GetComponent<Animator>().SetBool("Moving", false);
+        }
+
+        //Die
+
+        if (currentHP <= 0)
+        {
+            GetComponent<Animator>().SetTrigger("Die");
+            movSpeed = 0;
+            Invoke("ReviveInCheckPoint", 5f);
         }
     }
 
@@ -80,6 +93,18 @@ public class PlayerController : MonoBehaviour
     {
         swordHitBox.SetActive(false);
         GetComponent<Animator>().SetBool("Attack", false);
+        movSpeed = initMovSpeed;
+    }
+
+    void PlayerTakeDamage()
+    {
+        currentHP--;
+    }
+
+    void ReviveInCheckPoint()
+    {
+        transform.position = lastCheckpoint.transform.position;
+        currentHP = maxHP;
         movSpeed = initMovSpeed;
     }
 }
