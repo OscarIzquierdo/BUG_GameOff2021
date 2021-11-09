@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float movSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] int jumpMax;
+    [SerializeField] GameObject swordHitBox;
     Rigidbody2D rb2D;
     private int jumpCount;
     private float initMovSpeed;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         jumpCount = jumpMax;
         initMovSpeed = movSpeed;
+        swordHitBox.SetActive(false);
     }
 
     void FixedUpdate()
@@ -60,6 +62,7 @@ public class PlayerController : MonoBehaviour
             //Attack
             GetComponent<Animator>().SetBool("Attack", true);
             movSpeed = 0;
+            swordHitBox.SetActive(true);
         }
     }
 
@@ -75,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
     public void EndAttackAnimation()
     {
+        swordHitBox.SetActive(false);
         GetComponent<Animator>().SetBool("Attack", false);
         movSpeed = initMovSpeed;
     }
