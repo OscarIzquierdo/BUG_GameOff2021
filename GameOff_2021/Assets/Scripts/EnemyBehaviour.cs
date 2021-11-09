@@ -15,6 +15,8 @@ public class EnemyBehaviour : MonoBehaviour
     Animator animator;
     [SerializeField] bool playerIsInRange;
 
+    GameObject player;
+
     public bool PlayerIsInRange { get => playerIsInRange; set => playerIsInRange = value; }
 
     private void Start()
@@ -24,6 +26,7 @@ public class EnemyBehaviour : MonoBehaviour
         boxCol = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         PlayerIsInRange = false;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void FixedUpdate()
@@ -50,7 +53,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else if (enemyType == enemies.skeleton_mage)
         {
-            Debug.Log("Esqueleto Mago");
+            SkeletonMageBehaviour();
         }
     }
 
@@ -106,7 +109,13 @@ public class EnemyBehaviour : MonoBehaviour
 
     void SkeletonMageBehaviour()
     {
+        if (PlayerIsInRange)
+        {
+            animator.SetBool("RangedAttack", true);
 
+            animator.SetBool("RangedAttack", false);
+
+        }
     }
 
     public void AttackAnimationEnded()
@@ -114,6 +123,7 @@ public class EnemyBehaviour : MonoBehaviour
         animator.SetBool("Attack", false);
         moveSpeed = initMoveSpeed;
     }
+
 
     private bool isFacingRight()
     {
