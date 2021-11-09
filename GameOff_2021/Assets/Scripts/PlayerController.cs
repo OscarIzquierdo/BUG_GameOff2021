@@ -9,15 +9,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int jumpMax;
     Rigidbody2D rb2D;
     private int jumpCount;
+    private float initMovSpeed;
 
     private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         jumpCount = jumpMax;
+        initMovSpeed = movSpeed;
     }
 
     void FixedUpdate()
     {
+        //Move
+
         float inputX = Input.GetAxisRaw("Horizontal");
 
         transform.Translate(new Vector3(inputX * movSpeed * Time.fixedDeltaTime, 0f, 0f), Space.World);
@@ -45,9 +49,17 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W) && jumpCount > 0)
         {
+            //Jump Start
             GetComponent<Animator>().SetBool("Jump", true);
             rb2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumpCount--;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            //Attack
+            GetComponent<Animator>().SetBool("Attack", true);
+            movSpeed = 0;
         }
     }
 
@@ -55,8 +67,15 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor")
         {
+            //End Jump
             GetComponent<Animator>().SetBool("Jump", false);
             jumpCount = jumpMax;
         }
+    }
+
+    public void EndAttackAnimation()
+    {
+        GetComponent<Animator>().SetBool("Attack", false);
+        movSpeed = initMovSpeed;
     }
 }
