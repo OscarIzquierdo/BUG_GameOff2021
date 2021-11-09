@@ -28,12 +28,6 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector2(1, transform.localScale.y);
         }
-
-        ContactFilter2D filter;
-        if (Physics2D.Raycast(transform.position, Vector2.down, 0.1f, filter, RaycastHit2D[]);
-        {
-
-        }
     }
 
     private void Update()
