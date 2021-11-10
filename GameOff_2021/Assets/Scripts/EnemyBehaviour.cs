@@ -67,7 +67,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else if (enemyType == enemies.skeleton_base)
         {
-            Debug.Log("Esqueleto");
+            SkeletonBaseBehaviour();
         }
         else if (enemyType == enemies.skeleton_mage)
         {
@@ -116,6 +116,28 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     void SpiderBehaviour()
+    {
+        if (!PlayerIsInRange)
+        {
+            if (isFacingRight())
+            {
+                //Move Right
+                rb2D.velocity = new Vector2(moveSpeed, 0f);
+            }
+            else
+            {
+                //Move Left
+                rb2D.velocity = new Vector2(-moveSpeed, 0f);
+            }
+        }
+        else
+        {
+            moveSpeed = 0f;
+            animator.SetBool("Attack", true);
+        }
+    }
+
+    void SkeletonBaseBehaviour()
     {
         if (!PlayerIsInRange)
         {
