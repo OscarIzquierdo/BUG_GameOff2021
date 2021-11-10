@@ -582,7 +582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &967963171
 Animator:
   serializedVersion: 3
@@ -879,7 +879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1394726056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,8 +892,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341aafed2545d0248a295b2cc33dda74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 0
-  enemyMaxHP: 0
+  enemyType: 1
+  enemyMaxHP: 1
   moveSpeed: 2
   castTimeStopFollow: 0
   maxCastTime: 0
@@ -2057,7 +2057,7 @@ GameObject:
   - component: {fileID: 1804738982}
   m_Layer: 0
   m_Name: BeeHitBox
-  m_TagString: Untagged
+  m_TagString: PlayerTakeDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2089,7 +2089,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.050920606, y: 0}
+  m_Offset: {x: 0.050920606, y: -0.19533396}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2100,7 +2100,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8981588, y: 1}
+  m_Size: {x: 0.8981588, y: 1.3906679}
   m_EdgeRadius: 0
 --- !u!1 &1914355832
 GameObject:
