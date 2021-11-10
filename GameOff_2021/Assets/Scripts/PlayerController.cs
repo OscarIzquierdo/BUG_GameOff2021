@@ -8,9 +8,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpForce;
     [SerializeField] int jumpMax;
     [SerializeField] int maxHP;
-    [SerializeField] GameObject swordHitBox;
+    [SerializeField] GameObject swordHitBoxPrefab;
+    [SerializeField] GameObject swordHitBoxSpawn;
     [SerializeField] GameObject lastCheckpoint;
-    Rigidbody2D rb2D;
+    private Rigidbody2D rb2D;
+    private GameObject swordHitBox;
     private int currentHP;
     private int jumpCount;
     private float initMovSpeed;
@@ -20,8 +22,8 @@ public class PlayerController : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         jumpCount = jumpMax;
         initMovSpeed = movSpeed;
-        swordHitBox.SetActive(false);
         currentHP = maxHP;
+        GetComponent<Animator>().SetBool("Die", false);
     }
 
     void FixedUpdate()
@@ -54,10 +56,13 @@ public class PlayerController : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            Debug.Log("Die");
-            GetComponent<Animator>().SetTrigger("Die");
+            GetComponent<Animator>().SetBool("Die", true);
             movSpeed = 0;
-            Invoke("ReviveInCheckPoint", 5f);
+            //Invoke("ReviveInCheckPoint", 5f);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("Die", false);
         }
     }
 
@@ -74,9 +79,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //Attack
+            swordHitBox = Instantiate(swordHitBoxPrefab, swordHitBoxSpawn.transform.position,Quaternion.identity);
             GetComponent<Animator>().SetBool("Attack", true);
             movSpeed = 0;
-            swordHitBox.SetActive(true);
         }
     }
 
@@ -88,24 +93,36 @@ public class PlayerController : MonoBehaviour
             GetComponent<Animator>().SetBool("Jump", false);
             jumpCount = jumpMax;
         }
+
+        
     }
 
     public void EndAttackAnimation()
     {
-        swordHitBox.SetActive(false);
+        
         GetComponent<Animator>().SetBool("Attack", false);
         movSpeed = initMovSpeed;
+        Destroy(swordHitBox);
     }
 
     void PlayerTakeDamage()
     {
         currentHP--;
+        Debug.Log(currentHP + " HP left");
     }
 
-    void ReviveInCheckPoint()
+    //void ReviveInCheckPoint()
+    //{
+    //    transform.position = lastCheckpoint.transform.position;
+    //    currentHP = maxHP;
+    //    movSpeed = initMovSpeed;
+    //}
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        transform.position = lastCheckpoint.transform.position;
-        currentHP = maxHP;
-        movSpeed = initMovSpeed;
+        if (collision.tag == "PlayerTakeDamage" && currentHP > 0)
+        {
+            PlayerTakeDamage();
+        }
     }
 }

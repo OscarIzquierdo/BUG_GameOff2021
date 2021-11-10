@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public enum enemies {slime, bee, spider, bat, skeleton_base, skeleton_mage};
+    public enum enemies {slime, bee, spider, bat, skeleton_base, skeleton_mage, dead};
     [Header("Type of Enemy")]
     public enemies enemyType;
+    [Header("EnemyStats")]
+    [SerializeField] float enemyMaxHP;
     [Header("Float")]
     [SerializeField] float moveSpeed;
     [SerializeField] float castTimeStopFollow;
@@ -25,6 +27,7 @@ public class EnemyBehaviour : MonoBehaviour
     private GameObject fireColumn;
     private float initMoveSpeed;
     private float castTime;
+    private float currentHP;
     private bool canAttack = true;
     private bool isCasting = false;
     private int layerMask;
@@ -40,6 +43,7 @@ public class EnemyBehaviour : MonoBehaviour
         PlayerIsInRange = false;
         mageObjective = GameObject.Find("MageObjective");
         layerMask = LayerMask.GetMask("Floor");
+        currentHP = enemyMaxHP;
         
     }
 
@@ -188,6 +192,15 @@ public class EnemyBehaviour : MonoBehaviour
     private bool isFacingRight()
     {
         return transform.localScale.x > Mathf.Epsilon;
+    }
+
+    public void TakeDamage()
+    {
+        currentHP--;
+        if (currentHP <= 0)
+        {
+            enemyType = enemies.dead;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
