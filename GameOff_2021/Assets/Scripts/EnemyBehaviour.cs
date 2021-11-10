@@ -206,7 +206,7 @@ public class EnemyBehaviour : MonoBehaviour
             enemyType = enemies.dead;
             animator.SetBool("Die", true);
             GetComponent<BoxCollider2D>().enabled = false;
-            GetComponentInChildren<CircleCollider2D>().enabled = false;
+            //GetComponentInChildren<CircleCollider2D>().enabled = false;
             Destroy(gameObject, 1f);
         }
     }
