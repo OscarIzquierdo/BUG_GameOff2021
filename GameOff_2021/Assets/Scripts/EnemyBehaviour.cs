@@ -73,6 +73,10 @@ public class EnemyBehaviour : MonoBehaviour
         {
             SkeletonMageBehaviour();
         }
+        else if (enemyType == enemies.dead)
+        {
+            moveSpeed = 0;
+        }
     }
 
     void SlimeBehaviour()
@@ -200,6 +204,10 @@ public class EnemyBehaviour : MonoBehaviour
         if (currentHP <= 0)
         {
             enemyType = enemies.dead;
+            animator.SetBool("Die", true);
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponentInChildren<CircleCollider2D>().enabled = false;
+            Destroy(gameObject, 1f);
         }
     }
 

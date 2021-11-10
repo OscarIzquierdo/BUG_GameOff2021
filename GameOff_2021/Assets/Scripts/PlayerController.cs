@@ -56,9 +56,10 @@ public class PlayerController : MonoBehaviour
 
         if (currentHP <= 0)
         {
+            GetComponent<Animator>().SetBool("isRevive", false);
             GetComponent<Animator>().SetBool("Die", true);
             movSpeed = 0;
-            //Invoke("ReviveInCheckPoint", 5f);
+            Invoke("ReviveInCheckPoint", 5f);
         }
         else
         {
@@ -111,12 +112,13 @@ public class PlayerController : MonoBehaviour
         Debug.Log(currentHP + " HP left");
     }
 
-    //void ReviveInCheckPoint()
-    //{
-    //    transform.position = lastCheckpoint.transform.position;
-    //    currentHP = maxHP;
-    //    movSpeed = initMovSpeed;
-    //}
+    void ReviveInCheckPoint()
+    {
+        GetComponent<Animator>().SetBool("isRevive", true);
+        transform.position = lastCheckpoint.transform.position;
+        currentHP = maxHP;
+        movSpeed = initMovSpeed;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
