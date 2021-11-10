@@ -95,15 +95,23 @@ public class EnemyBehaviour : MonoBehaviour
 
     void BeeBehaviour()
     {
-        if (isFacingRight())
+        if (!PlayerIsInRange)
         {
-            //Move Right
-            rb2D.velocity = new Vector2(moveSpeed, 0f);
+            if (isFacingRight())
+            {
+                //Move Right
+                rb2D.velocity = new Vector2(moveSpeed, 0f);
+            }
+            else
+            {
+                //Move Left
+                rb2D.velocity = new Vector2(-moveSpeed, 0f);
+            }
         }
         else
         {
-            //Move Left
-            rb2D.velocity = new Vector2(-moveSpeed, 0f);
+            moveSpeed = 0f;
+            animator.SetBool("Attack", true);
         }
     }
 
