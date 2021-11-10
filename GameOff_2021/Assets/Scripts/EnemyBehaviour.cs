@@ -5,28 +5,29 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
     public enum enemies {slime, bee, spider, bat, skeleton_base, skeleton_mage};
-
+    [Header("Type of Enemy")]
     public enemies enemyType;
-
+    [Header("Float")]
     [SerializeField] float moveSpeed;
-    float initMoveSpeed;
+    [SerializeField] float castTimeStopFollow;
+    [SerializeField] float maxCastTime;
+    [Header("Bool")]
+    [SerializeField] bool playerIsInRange;
+    [Header("GameObject")]
+    [SerializeField] GameObject magicSignalPrefab;
+    [SerializeField] GameObject fireColumnPrefab;
+
     Rigidbody2D rb2D;
     BoxCollider2D boxCol;
     Animator animator;
-    [SerializeField] bool playerIsInRange;
-    [SerializeField] GameObject magicSignalPrefab;
+    private GameObject mageObjective;
     private GameObject magicSignal;
-    GameObject mageObjective;
-    [SerializeField] GameObject fireColumnPrefab;
     private GameObject fireColumn;
-
-    float castTime;
-    [SerializeField] float castTimeStopFollow;
-    [SerializeField] float maxCastTime;
-
-    bool canAttack = true;
-    bool isCasting = false;
-    int layerMask;
+    private float initMoveSpeed;
+    private float castTime;
+    private bool canAttack = true;
+    private bool isCasting = false;
+    private int layerMask;
 
     public bool PlayerIsInRange { get => playerIsInRange; set => playerIsInRange = value; }
 

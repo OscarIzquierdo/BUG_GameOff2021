@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
 
         if (currentHP <= 0)
         {
+            Debug.Log("Die");
             GetComponent<Animator>().SetTrigger("Die");
             movSpeed = 0;
             Invoke("ReviveInCheckPoint", 5f);
