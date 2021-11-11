@@ -28,6 +28,10 @@ public class EnemyBehaviour : MonoBehaviour
     bool isCasting = false;
     int layerMask;
 
+    [SerializeField] GameObject[] teleportPositions;
+    GameObject chosenPosition;
+    GameObject lastChosenPosition;
+
     public bool PlayerIsInRange { get => playerIsInRange; set => playerIsInRange = value; }
 
     private void Start()
@@ -123,9 +127,7 @@ public class EnemyBehaviour : MonoBehaviour
     void SkeletonMageBehaviour()
     {
         if (PlayerIsInRange)
-        {
-           
-            
+        {         
             RaycastHit2D hit = Physics2D.Raycast(mageObjective.transform.position, -Vector2.up, Mathf.Infinity, layerMask, -Mathf.Infinity, Mathf.Infinity);
 
             if(magicSignal != null)
@@ -134,7 +136,7 @@ public class EnemyBehaviour : MonoBehaviour
 
                 if(castTime <= castTimeStopFollow)
                 {
-                    magicSignal.transform.position = new Vector2(mageObjective.transform.position.x, magicSignal.transform.position.y);
+                    magicSignal.transform.position = new Vector2(mageObjective.transform.position.x, hit.point.y);
                 }
                 if (castTime >= maxCastTime)
                 {
@@ -146,13 +148,13 @@ public class EnemyBehaviour : MonoBehaviour
             }
 
             if (hit.collider != null && hit.collider.tag == "Floor" && !isCasting && fireColumn == null && canAttack)
-            {
+            {               
                 animator.SetBool("RangedAttack", true);
                 magicSignal = Instantiate(magicSignalPrefab, hit.point, Quaternion.identity);
                 canAttack = false;
-            }
-            Debug.DrawRay(mageObjective.transform.position, -Vector2.up, Color.green);    
+            }   
         }
+        
     }
 
     public void AttackAnimationEnded()
@@ -176,7 +178,36 @@ public class EnemyBehaviour : MonoBehaviour
         fireColumn = Instantiate(fireColumnPrefab, magicSignal.transform.position, Quaternion.identity);
         Destroy(magicSignal.gameObject);
         Destroy(fireColumn, 3.0f);
+        TeleportAnim();
         Invoke("NewAttack", 4.5f);
+    }
+
+    private void TeleportAnim()
+    {
+        animator.SetBool("Teleport", true);
+    }
+
+    public void Teleport()
+    {
+        if(lastChosenPosition == null)
+        {
+            chosenPosition = teleportPositions[Random.Range(0, teleportPositions.Length)];
+            lastChosenPosition = chosenPosition;
+            transform.position = chosenPosition.transform.position;
+            animator.SetBool("Teleport", false);
+        }
+
+        else
+        {
+            while(chosenPosition == lastChosenPosition)
+            {
+                chosenPosition = teleportPositions[Random.Range(0, teleportPositions.Length)];
+            }
+                lastChosenPosition = chosenPosition;
+                transform.position = chosenPosition.transform.position;
+                animator.SetBool("Teleport", false);   
+        }
+        
     }
 
     private void NewAttack()
