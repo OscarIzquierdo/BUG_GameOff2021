@@ -4,29 +4,33 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public enum enemies {slime, bee, spider, bat, skeleton_base, skeleton_mage};
-
+    public enum enemies {slime, bee, spider, bat, skeleton_base, skeleton_mage, dead};
+    [Header("Type of Enemy")]
     public enemies enemyType;
-
+    [Header("EnemyStats")]
+    [SerializeField] float enemyMaxHP;
+    [Header("Float")]
     [SerializeField] float moveSpeed;
-    float initMoveSpeed;
+    [SerializeField] float castTimeStopFollow;
+    [SerializeField] float maxCastTime;
+    [Header("Bool")]
+    [SerializeField] bool playerIsInRange;
+    [Header("GameObject")]
+    [SerializeField] GameObject magicSignalPrefab;
+    [SerializeField] GameObject fireColumnPrefab;
+
     Rigidbody2D rb2D;
     BoxCollider2D boxCol;
     Animator animator;
-    [SerializeField] bool playerIsInRange;
-    [SerializeField] GameObject magicSignalPrefab;
+    private GameObject mageObjective;
     private GameObject magicSignal;
-    GameObject mageObjective;
-    [SerializeField] GameObject fireColumnPrefab;
     private GameObject fireColumn;
-
-    float castTime;
-    [SerializeField] float castTimeStopFollow;
-    [SerializeField] float maxCastTime;
-
-    bool canAttack = true;
-    bool isCasting = false;
-    int layerMask;
+    private float initMoveSpeed;
+    private float castTime;
+    private float currentHP;
+    private bool canAttack = true;
+    private bool isCasting = false;
+    private int layerMask;
 
     [SerializeField] GameObject[] teleportPositions;
     GameObject chosenPosition;
@@ -43,6 +47,7 @@ public class EnemyBehaviour : MonoBehaviour
         PlayerIsInRange = false;
         mageObjective = GameObject.Find("MageObjective");
         layerMask = LayerMask.GetMask("Floor");
+        currentHP = enemyMaxHP;
         
     }
 
@@ -66,11 +71,15 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else if (enemyType == enemies.skeleton_base)
         {
-            Debug.Log("Esqueleto");
+            SkeletonBaseBehaviour();
         }
         else if (enemyType == enemies.skeleton_mage)
         {
             SkeletonMageBehaviour();
+        }
+        else if (enemyType == enemies.dead)
+        {
+            moveSpeed = 0;
         }
     }
 
@@ -90,19 +99,49 @@ public class EnemyBehaviour : MonoBehaviour
 
     void BeeBehaviour()
     {
-        if (isFacingRight())
+        if (!PlayerIsInRange)
         {
-            //Move Right
-            rb2D.velocity = new Vector2(moveSpeed, 0f);
+            if (isFacingRight())
+            {
+                //Move Right
+                rb2D.velocity = new Vector2(moveSpeed, 0f);
+            }
+            else
+            {
+                //Move Left
+                rb2D.velocity = new Vector2(-moveSpeed, 0f);
+            }
         }
         else
         {
-            //Move Left
-            rb2D.velocity = new Vector2(-moveSpeed, 0f);
+            moveSpeed = 0f;
+            animator.SetBool("Attack", true);
         }
     }
 
     void SpiderBehaviour()
+    {
+        if (!PlayerIsInRange)
+        {
+            if (isFacingRight())
+            {
+                //Move Right
+                rb2D.velocity = new Vector2(moveSpeed, 0f);
+            }
+            else
+            {
+                //Move Left
+                rb2D.velocity = new Vector2(-moveSpeed, 0f);
+            }
+        }
+        else
+        {
+            moveSpeed = 0f;
+            animator.SetBool("Attack", true);
+        }
+    }
+
+    void SkeletonBaseBehaviour()
     {
         if (!PlayerIsInRange)
         {
@@ -218,6 +257,19 @@ public class EnemyBehaviour : MonoBehaviour
     private bool isFacingRight()
     {
         return transform.localScale.x > Mathf.Epsilon;
+    }
+
+    public void TakeDamage()
+    {
+        currentHP--;
+        if (currentHP <= 0)
+        {
+            enemyType = enemies.dead;
+            animator.SetBool("Die", true);
+            GetComponent<BoxCollider2D>().enabled = false;
+            //GetComponentInChildren<CircleCollider2D>().enabled = false;
+            Destroy(gameObject, 1f);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

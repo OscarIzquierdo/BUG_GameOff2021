@@ -12,7 +12,7 @@ public class SwordLogic : MonoBehaviour
         {
             enemy = collision.GetComponent<EnemyBehaviour>();
             Debug.Log(collision.name + " ha recibido 1 de daño");
-            //enemy.TakeDamage();
+            enemy.TakeDamage();
         }
     }
 }
