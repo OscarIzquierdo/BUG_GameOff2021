@@ -5,11 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class ButtonLogic : MonoBehaviour
 {
-    public enum sceneManagement {loadScene, quitGame}
+    public enum sceneManagement {loadScene, quitGame, resumeGame}
 
     public sceneManagement whatToDo;
 
     [SerializeField] string levelToLoad;
+    [SerializeField] GameObject pausePanel;
+
+    private bool isGamePaused;
+
+    public bool IsGamePaused { get => isGamePaused; set => isGamePaused = value; }
+    public GameObject PausePanel { get => pausePanel; set => pausePanel = value; }
 
     public void ExecuteAction()
     {
@@ -20,6 +26,14 @@ public class ButtonLogic : MonoBehaviour
         else if (whatToDo == sceneManagement.quitGame)
         {
             Application.Quit();
+        }
+        else if (whatToDo == sceneManagement.resumeGame)
+        {
+            if (IsGamePaused)
+            {
+                Time.timeScale = 1;
+                PausePanel.SetActive(false);
+            }
         }
     }
 }
