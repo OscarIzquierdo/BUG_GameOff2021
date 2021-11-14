@@ -4,26 +4,36 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Float")]
     [SerializeField] float movSpeed;
     [SerializeField] float jumpForce;
+    [Header("Int")]
     [SerializeField] int jumpMax;
     [SerializeField] int maxHP;
+    [Header("GameObject")]
     [SerializeField] GameObject swordHitBoxPrefab;
     [SerializeField] GameObject swordHitBoxSpawn;
     [SerializeField] GameObject lastCheckpoint;
+    [Header("Interface")]
+    [SerializeField] GameObject[] hP_Points;
+
     private Rigidbody2D rb2D;
     private GameObject swordHitBox;
+
     private int currentHP;
     private int jumpCount;
+    private int hpArrayCount;
+    
     private float initMovSpeed;
 
     private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        GetComponent<Animator>().SetBool("Die", false);
         jumpCount = jumpMax;
         initMovSpeed = movSpeed;
         currentHP = maxHP;
-        GetComponent<Animator>().SetBool("Die", false);
+        hpArrayCount = 0;
     }
 
     void FixedUpdate()
@@ -50,6 +60,23 @@ public class PlayerController : MonoBehaviour
         else
         {
             GetComponent<Animator>().SetBool("Moving", false);
+        }
+
+        //Reduce HP in GUI
+
+        if (currentHP == 2)
+        {
+            hP_Points[0].SetActive(false);
+        }
+
+        if (currentHP == 1)
+        {
+            hP_Points[1].SetActive(false);
+        }
+
+        if (currentHP == 0)
+        {
+            hP_Points[2].SetActive(false);
         }
 
         //Die
