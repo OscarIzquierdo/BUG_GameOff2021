@@ -26,9 +26,12 @@ public class PlayerController : MonoBehaviour
     private int hpArrayCount;
     
     private float initMovSpeed;
-    //private float speedY;
+
+    private bool secondFragment = false;
 
     private bool isGrounded = true;
+
+    public bool SecondFragment { get => secondFragment; set => secondFragment = value; }
 
     private void Start()
     {
@@ -43,6 +46,13 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         //Reduce HP in GUI
+
+        if (secondFragment && currentHP == maxHP)
+        {
+            hP_Points[0].SetActive(true);
+            hP_Points[1].SetActive(true);
+            hP_Points[2].SetActive(true);
+        }
 
         if (currentHP == 2)
         {
