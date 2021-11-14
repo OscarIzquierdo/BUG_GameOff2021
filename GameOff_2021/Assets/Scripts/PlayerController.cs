@@ -7,12 +7,13 @@ public class PlayerController : MonoBehaviour
     [Header("Float")]
     [SerializeField] float movSpeed;
     [SerializeField] float jumpForce;
+    //[SerializeField] float gravity;
     [Header("Int")]
     [SerializeField] int jumpMax;
     [SerializeField] int maxHP;
     [Header("GameObject")]
     [SerializeField] GameObject swordHitBoxPrefab;
-    [SerializeField] GameObject swordHitBoxSpawn;
+    //[SerializeField] GameObject swordHitBoxSpawn;
     [SerializeField] GameObject lastCheckpoint;
     [Header("Interface")]
     [SerializeField] GameObject[] hP_Points;
@@ -25,6 +26,9 @@ public class PlayerController : MonoBehaviour
     private int hpArrayCount;
     
     private float initMovSpeed;
+    //private float speedY;
+
+    private bool isGrounded = true;
 
     private void Start()
     {
@@ -38,30 +42,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Move
-
-        float inputX = Input.GetAxisRaw("Horizontal");
-
-        transform.Translate(new Vector3(inputX * movSpeed * Time.fixedDeltaTime, 0f, 0f), Space.World);
-
-        if (inputX < 0)
-        {
-            transform.localScale = new Vector2(-1, transform.localScale.y);
-        }
-        else if (inputX > 0)
-        {
-            transform.localScale = new Vector2(1, transform.localScale.y);
-        }
-
-        if (inputX != 0)
-        {
-            GetComponent<Animator>().SetBool("Moving", true);
-        }
-        else
-        {
-            GetComponent<Animator>().SetBool("Moving", false);
-        }
-
         //Reduce HP in GUI
 
         if (currentHP == 2)
@@ -86,7 +66,8 @@ public class PlayerController : MonoBehaviour
             GetComponent<Animator>().SetBool("isRevive", false);
             GetComponent<Animator>().SetBool("Die", true);
             movSpeed = 0;
-            Invoke("ReviveInCheckPoint", 5f);
+            isGrounded = true;
+            //Invoke("ReviveInCheckPoint", 5f);
         }
         else
         {
@@ -96,18 +77,57 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        //Gravity
+
+        //if (isGrounded)
+        //{
+        //    speedY = 0;
+        //}
+        //else
+        //{ 
+        //    speedY -= gravity * Time.deltaTime;
+        //}
+        
+        //Move
+
+        float inputX = Input.GetAxisRaw("Horizontal");
+
+        rb2D.velocity = new Vector2(inputX * movSpeed, rb2D.velocity.y);
+
+        //transform.Translate(new Vector3(inputX * movSpeed * Time.deltaTime, speedY * Time.deltaTime, 0f), Space.World);
+
+        if (inputX < 0)
+        {
+            transform.localScale = new Vector2(-1, transform.localScale.y);
+        }
+        else if (inputX > 0)
+        {
+            transform.localScale = new Vector2(1, transform.localScale.y);
+        }
+
+        if (inputX != 0)
+        {
+            GetComponent<Animator>().SetBool("Moving", true);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("Moving", false);
+        }
+
         if (Input.GetKeyDown(KeyCode.W) && jumpCount > 0)
         {
             //Jump Start
             GetComponent<Animator>().SetBool("Jump", true);
             rb2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumpCount--;
+            isGrounded = false;
         }
 
         if (Input.GetMouseButtonDown(0))
         {
             //Attack
-            swordHitBox = Instantiate(swordHitBoxPrefab, swordHitBoxSpawn.transform.position,Quaternion.identity);
+            //swordHitBox = Instantiate(swordHitBoxPrefab, swordHitBoxSpawn.transform.position,Quaternion.identity);
+            swordHitBoxPrefab.SetActive(true);
             GetComponent<Animator>().SetBool("Attack", true);
             movSpeed = 0;
         }
@@ -120,6 +140,7 @@ public class PlayerController : MonoBehaviour
             //End Jump
             GetComponent<Animator>().SetBool("Jump", false);
             jumpCount = jumpMax;
+            isGrounded = true;
         }
 
         
@@ -130,7 +151,8 @@ public class PlayerController : MonoBehaviour
         
         GetComponent<Animator>().SetBool("Attack", false);
         movSpeed = initMovSpeed;
-        Destroy(swordHitBox);
+        swordHitBoxPrefab.SetActive(false);
+        //Destroy(swordHitBox);
     }
 
     void PlayerTakeDamage()
@@ -139,7 +161,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(currentHP + " HP left");
     }
 
-    void ReviveInCheckPoint()
+    public void ReviveInCheckPoint()
     {
         GetComponent<Animator>().SetBool("isRevive", true);
         transform.position = lastCheckpoint.transform.position;

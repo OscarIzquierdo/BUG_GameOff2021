@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public enum enemies {slime, bee, spider, bat, skeleton_base, skeleton_mage, dead};
+    public enum enemies {slime, bee, spider, skeleton_base, skeleton_mage, dead};
     [Header("Type of Enemy")]
     public enemies enemyType;
     [Header("EnemyStats")]
@@ -65,10 +65,6 @@ public class EnemyBehaviour : MonoBehaviour
         {
             SpiderBehaviour();
         }
-        else if (enemyType == enemies.bat)
-        {
-            Debug.Log("Murcierlago");
-        }
         else if (enemyType == enemies.skeleton_base)
         {
             SkeletonBaseBehaviour();
@@ -80,6 +76,7 @@ public class EnemyBehaviour : MonoBehaviour
         else if (enemyType == enemies.dead)
         {
             moveSpeed = 0;
+            rb2D.velocity = Vector2.zero;
         }
     }
 

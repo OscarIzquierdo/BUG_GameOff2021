@@ -10,7 +10,7 @@ public class SwordLogic : MonoBehaviour
     {
         if (collision.tag == "Enemy")
         {
-            enemy = collision.GetComponent<EnemyBehaviour>();
+            enemy = collision.transform.parent.GetComponent<EnemyBehaviour>();
             Debug.Log(collision.name + " ha recibido 1 de daño");
             enemy.TakeDamage();
         }
