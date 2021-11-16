@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5300423863789359575}
   - component: {fileID: 5300423863789359574}
   - component: {fileID: 5300423863789359577}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Slime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -119,12 +119,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 0
   enemyMaxHP: 1
-  moveSpeed: 1
+  moveSpeed: 0.5
   castTimeStopFollow: 0
   maxCastTime: 0
   playerIsInRange: 0
   magicSignalPrefab: {fileID: 0}
   fireColumnPrefab: {fileID: 0}
+  teleportPositions: []
 --- !u!50 &5300423863789359574
 Rigidbody2D:
   serializedVersion: 4
@@ -182,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5300423864145759554}
   - component: {fileID: 5300423864145759557}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SlimeHitbox
   m_TagString: PlayerTakeDamage
   m_Icon: {fileID: 0}
