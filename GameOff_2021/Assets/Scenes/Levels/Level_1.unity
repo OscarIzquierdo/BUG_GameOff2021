@@ -8529,6 +8529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1951234793}
   - component: {fileID: 1951234794}
+  - component: {fileID: 1951234795}
   m_Layer: 0
   m_Name: LimitFall
   m_TagString: Untagged
@@ -8576,6 +8577,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 75.339966, y: 0.2506857}
   m_EdgeRadius: 0
+--- !u!114 &1951234795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951234792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7830a65070692d742a13217af6fd8a86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1953268356
 GameObject:
   m_ObjectHideFlags: 0
