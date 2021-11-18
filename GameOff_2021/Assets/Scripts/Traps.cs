@@ -73,8 +73,7 @@ public class Traps : MonoBehaviour
         percentageUp = currentTimeMoving / maxTimeToGoUp;
         percentageDown = currentTimeMoving / maxTimeToGoDown;
 
-
-        if(actualPosition.position.y <= downPosition.position.y) //Vector2.Distance(punto actual, punto final) <= float 
+        if (Vector2.Distance(transform.position, downPosition.position) > 0.05f)
         {
             currentTimeMoving = 0.0f;
             isDown = true;
@@ -82,7 +81,7 @@ public class Traps : MonoBehaviour
             print("going up");
         }
 
-        if(actualPosition.position.y >= upPosition.position.y) //Vector2.Distance(punto actual, punto final) <= float
+        if(Vector2.Distance(transform.position, upPosition.position) > 0.05f)
         {
             currentTimeMoving = 0.0f;
             isUp = true;
