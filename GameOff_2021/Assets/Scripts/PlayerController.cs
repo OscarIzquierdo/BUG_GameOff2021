@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private int currentHP;
     private int jumpCount;
     private int hpArrayCount;
-    
+
     private float initMovSpeed;
 
     private bool secondFragment = false;
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     public bool SecondFragment { get => secondFragment; set => secondFragment = value; }
     public int CurrentHP { get => currentHP; set => currentHP = value; }
+    public int MaxHP { get => maxHP; set => maxHP = value; }
 
     private void Start()
     {
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
         GetComponent<Animator>().SetBool("Die", false);
         jumpCount = jumpMax;
         initMovSpeed = movSpeed;
-        CurrentHP = maxHP;
+        CurrentHP = MaxHP;
         hpArrayCount = 0;
     }
 
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         //Reduce HP in GUI
 
-        if (secondFragment && CurrentHP == maxHP)
+        if (secondFragment && CurrentHP == MaxHP)
         {
             hP_Points[0].SetActive(true);
             hP_Points[1].SetActive(true);
@@ -58,15 +59,21 @@ public class PlayerController : MonoBehaviour
         if (CurrentHP == 2)
         {
             hP_Points[0].SetActive(false);
+            hP_Points[1].SetActive(true);
+            hP_Points[2].SetActive(true);
         }
 
         if (CurrentHP == 1)
         {
+            hP_Points[0].SetActive(false);
             hP_Points[1].SetActive(false);
+            hP_Points[2].SetActive(true);
         }
 
         if (CurrentHP == 0)
         {
+            hP_Points[0].SetActive(false);
+            hP_Points[1].SetActive(false);
             hP_Points[2].SetActive(false);
         }
 
@@ -98,7 +105,7 @@ public class PlayerController : MonoBehaviour
         //{ 
         //    speedY -= gravity * Time.deltaTime;
         //}
-        
+
         //Move
 
         float inputX = Input.GetAxisRaw("Horizontal");
@@ -154,12 +161,12 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
         }
 
-        
+
     }
 
     public void EndAttackAnimation()
     {
-        
+
         GetComponent<Animator>().SetBool("Attack", false);
         movSpeed = initMovSpeed;
         swordHitBoxPrefab.SetActive(false);
@@ -176,7 +183,7 @@ public class PlayerController : MonoBehaviour
     {
         GetComponent<Animator>().SetBool("isRevive", true);
         transform.position = lastCheckpoint.transform.position;
-        CurrentHP = maxHP;
+        CurrentHP = MaxHP;
         movSpeed = initMovSpeed;
     }
 
