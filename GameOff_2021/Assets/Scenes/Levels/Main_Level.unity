@@ -534,15 +534,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small_spike_trap (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 890767063325738249, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
+    - target: {fileID: 3725157366169868315, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: speedUp
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2997632122257005641, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
+    - target: {fileID: 3725157366169868315, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.03
+      propertyPath: speedDown
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0699a6d14bf049844bc7b4d41d0c2d6f, type: 3}

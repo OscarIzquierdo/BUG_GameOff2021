@@ -14,18 +14,16 @@ public class Traps : MonoBehaviour
     private bool isTopRight = false;
     private bool isTopLeft = true;
 
-    Transform actualPosition;
     [SerializeField] Transform upPosition;
     [SerializeField] Transform downPosition;
 
     [SerializeField] float maxTimeToGoUp;
     [SerializeField] float maxTimeToGoDown;
-    private float currentTimeMoving = 0.0f;
-    private float percentageUp;
-    private float percentageDown;
+
+    [SerializeField] float speedUp;
+    [SerializeField] float speedDown;
 
     private bool isUp;
-    private bool isDown;
 
 
     void Start()
@@ -68,45 +66,36 @@ public class Traps : MonoBehaviour
 
     void SpikeTrapBehaviour()
     {
-        actualPosition = gameObject.transform;
-        currentTimeMoving += Time.fixedDeltaTime;
-        percentageUp = currentTimeMoving / maxTimeToGoUp;
-        percentageDown = currentTimeMoving / maxTimeToGoDown;
-
-
-        if(actualPosition.position.y <= downPosition.position.y)
+        if (Vector2.Distance(transform.position, downPosition.position) <= 0.0f)
         {
-            currentTimeMoving = 0.0f;
-            isDown = true;
-            isUp = false;
-            print("going up");
-        }
-
-        if(actualPosition.position.y >= upPosition.position.y)
-        {
-            currentTimeMoving = 0.0f;
             isUp = true;
-            isDown = false;
-            print("going down");
+
         }
 
-        if(isDown && percentageUp <= 1.0f)
-        {           
-            goUp();
-        }
-
-        if(isUp && percentageDown <= 1.0f)
+        if (Vector2.Distance(transform.position, upPosition.position) <= 0.0f)
         {
-            Invoke("goDown", 0.5f);
-        }       
+            isUp = false;
+        }
+
+        if (isUp)
+        {
+            GoUp();
+        }
+
+        if (!isUp)
+        {
+            Invoke("GoDown", 1.0f);
+        }
     }
-    void goUp()
+    void GoUp()
     {
-        transform.position = Vector2.Lerp(downPosition.position, upPosition.position, percentageUp);
+        transform.position = Vector2.MoveTowards(transform.position, upPosition.position, speedUp * Time.fixedDeltaTime);
     }
 
-    void goDown()
+    void GoDown()
     {
-        transform.position = Vector2.Lerp(upPosition.position, downPosition.position, percentageDown);
+        transform.position = Vector2.MoveTowards(transform.position, downPosition.position, speedDown * Time.fixedDeltaTime);
     }
+
+
 }
