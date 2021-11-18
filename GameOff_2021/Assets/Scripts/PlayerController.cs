@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = true;
 
     public bool SecondFragment { get => secondFragment; set => secondFragment = value; }
+    public int CurrentHP { get => currentHP; set => currentHP = value; }
 
     private void Start()
     {
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
         GetComponent<Animator>().SetBool("Die", false);
         jumpCount = jumpMax;
         initMovSpeed = movSpeed;
-        currentHP = maxHP;
+        CurrentHP = maxHP;
         hpArrayCount = 0;
     }
 
@@ -47,31 +48,31 @@ public class PlayerController : MonoBehaviour
     {
         //Reduce HP in GUI
 
-        if (secondFragment && currentHP == maxHP)
+        if (secondFragment && CurrentHP == maxHP)
         {
             hP_Points[0].SetActive(true);
             hP_Points[1].SetActive(true);
             hP_Points[2].SetActive(true);
         }
 
-        if (currentHP == 2)
+        if (CurrentHP == 2)
         {
             hP_Points[0].SetActive(false);
         }
 
-        if (currentHP == 1)
+        if (CurrentHP == 1)
         {
             hP_Points[1].SetActive(false);
         }
 
-        if (currentHP == 0)
+        if (CurrentHP == 0)
         {
             hP_Points[2].SetActive(false);
         }
 
         //Die
 
-        if (currentHP <= 0)
+        if (CurrentHP <= 0)
         {
             GetComponent<Animator>().SetBool("isRevive", false);
             GetComponent<Animator>().SetBool("Die", true);
@@ -167,21 +168,21 @@ public class PlayerController : MonoBehaviour
 
     void PlayerTakeDamage()
     {
-        currentHP--;
-        Debug.Log(currentHP + " HP left");
+        CurrentHP--;
+        Debug.Log(CurrentHP + " HP left");
     }
 
     public void ReviveInCheckPoint()
     {
         GetComponent<Animator>().SetBool("isRevive", true);
         transform.position = lastCheckpoint.transform.position;
-        currentHP = maxHP;
+        CurrentHP = maxHP;
         movSpeed = initMovSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "PlayerTakeDamage" && currentHP > 0)
+        if (collision.tag == "PlayerTakeDamage" && CurrentHP > 0)
         {
             PlayerTakeDamage();
         }
