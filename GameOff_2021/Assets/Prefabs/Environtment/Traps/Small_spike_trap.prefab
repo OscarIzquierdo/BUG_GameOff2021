@@ -194,6 +194,8 @@ MonoBehaviour:
   downPosition: {fileID: 974379828608981796}
   maxTimeToGoUp: 2
   maxTimeToGoDown: 1
+  speedUp: 0
+  speedDown: 0
 --- !u!1 &8847537444329115428
 GameObject:
   m_ObjectHideFlags: 0
