@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TpPlayer : MonoBehaviour
 {
-    public enum tpType {tpTransform, tpScene};
+    public enum tpType { tpTransform, tpScene };
 
     public tpType thisType;
 
