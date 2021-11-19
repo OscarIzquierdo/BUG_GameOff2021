@@ -486,11 +486,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 588371465003910102, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
         type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -18.987305
-      objectReference: {fileID: 0}
-    - target: {fileID: 588371465003910102, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -534,15 +529,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small_spike_trap (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 3725157366169868315, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
+    - target: {fileID: 7588212907230889562, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
         type: 3}
-      propertyPath: speedUp
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3725157366169868315, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
-        type: 3}
-      propertyPath: speedDown
-      value: 3
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0699a6d14bf049844bc7b4d41d0c2d6f, type: 3}
@@ -5238,7 +5228,7 @@ PrefabInstance:
     - target: {fileID: 588371465003910102, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.987305
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 588371465003910102, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
         type: 3}
