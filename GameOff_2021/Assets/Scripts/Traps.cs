@@ -7,13 +7,16 @@ public class Traps : MonoBehaviour
     public enum traps { axe, spikes };
     public traps trapType;
 
+    //Axe
+    [SerializeField] float axeSpeed;
+    [SerializeField] Transform rotationPoint;
+    [SerializeField] Transform rotationTargetLeft;
+    [SerializeField] Transform rotationTargetRight;
 
-    [SerializeField] float timeToChangeSide;
-    private float maxTimeToChangeSide = 1.5f;
+    [SerializeField] bool isTopRight = false;
 
-    private bool isTopRight = false;
-    private bool isTopLeft = true;
 
+    //Spike
     [SerializeField] Transform upPosition;
     [SerializeField] Transform downPosition;
 
@@ -28,7 +31,7 @@ public class Traps : MonoBehaviour
 
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -46,23 +49,30 @@ public class Traps : MonoBehaviour
 
     void AxeTrapBehaviour()
     {
-        timeToChangeSide += Time.fixedDeltaTime;
-
-        if (timeToChangeSide >= maxTimeToChangeSide && isTopLeft)
+             
+        if (Quaternion.Angle(rotationPoint.rotation, rotationTargetRight.rotation) <= 0)
         {
-            isTopLeft = false;
             isTopRight = true;
-            timeToChangeSide = 0.0f;
-            //trasform.rotation = Quaternion.Lerp();
         }
 
-        else if (timeToChangeSide >= maxTimeToChangeSide && isTopRight)
+        if (Quaternion.Angle(rotationPoint.rotation, rotationTargetLeft.rotation) <= 0)
         {
-            isTopLeft = true;
             isTopRight = false;
-            timeToChangeSide = 0.0f;
         }
+
+        if (isTopRight)
+        {
+            GoLeft();
+        }
+
+        if (!isTopRight)
+        {
+            GoRight();
+        }
+
     }
+
+
 
     void SpikeTrapBehaviour()
     {
@@ -97,5 +107,24 @@ public class Traps : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, downPosition.position, speedDown * Time.fixedDeltaTime);
     }
 
+    void GoRight()
+    {
+
+        float singleStep = axeSpeed * Time.fixedDeltaTime;
+
+        rotationPoint.transform.rotation = Quaternion.RotateTowards(rotationPoint.transform.rotation, rotationTargetRight.rotation, singleStep);
+
+        print("Going right");
+    }
+
+    void GoLeft()
+    {
+
+        float singleStep = axeSpeed * Time.fixedDeltaTime;
+
+        rotationPoint.transform.rotation = Quaternion.RotateTowards(rotationPoint.transform.rotation, rotationTargetLeft.rotation, singleStep);
+
+        print("Going left");
+    }
 
 }

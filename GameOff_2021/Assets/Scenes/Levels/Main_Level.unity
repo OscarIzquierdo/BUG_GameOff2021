@@ -486,11 +486,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 588371465003910102, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
         type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -18.987305
-      objectReference: {fileID: 0}
-    - target: {fileID: 588371465003910102, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -534,18 +529,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small_spike_trap (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 3725157366169868315, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
-        type: 3}
-      propertyPath: speedUp
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3725157366169868315, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
-        type: 3}
-      propertyPath: speedDown
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0699a6d14bf049844bc7b4d41d0c2d6f, type: 3}
+--- !u!1 &459248261 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8847537444329115428, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
+    type: 3}
+  m_PrefabInstance: {fileID: 459248260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &459248262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459248261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 097b9962b4b31c34598a95a575d04fed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &485999483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5238,7 +5241,7 @@ PrefabInstance:
     - target: {fileID: 588371465003910102, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.987305
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 588371465003910102, guid: 0699a6d14bf049844bc7b4d41d0c2d6f,
         type: 3}

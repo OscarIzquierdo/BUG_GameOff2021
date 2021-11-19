@@ -193,5 +193,11 @@ public class PlayerController : MonoBehaviour
         {
             PlayerTakeDamage();
         }
+
+        if (collision.tag == "CheckPoint")
+        {
+            lastCheckpoint = collision.gameObject;
+            lastCheckpoint.GetComponentInChildren<Animator>().SetTrigger("Checked");
+        }
     }
 }
