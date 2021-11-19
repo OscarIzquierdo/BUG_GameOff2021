@@ -304,7 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisType: 1
   destination: {fileID: 0}
-  sceneToLoad: 
+  sceneToLoad: Main_Level
 --- !u!4 &305477715 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5186007974761974012, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
@@ -9145,7 +9145,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7776026, y: 1}
+    m_SensorSize: {x: 1.7767857, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
