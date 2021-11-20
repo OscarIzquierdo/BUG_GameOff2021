@@ -279,11 +279,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5186007974761974003, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
         type: 3}
-      propertyPath: lastCheckpoint
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5186007974761974003, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
-        type: 3}
       propertyPath: hP_Points.Array.data[0]
       value: 
       objectReference: {fileID: 894196967}
