@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject lastCheckpoint;
     [Header("Interface")]
     [SerializeField] GameObject[] hP_Points;
+    [Header("Audios")]
+    [SerializeField] AudioSource OverworldSFX;
+    [SerializeField] AudioSource CaveSFX;
 
     private Rigidbody2D rb2D;
     private GameObject swordHitBox;
@@ -28,12 +31,13 @@ public class PlayerController : MonoBehaviour
     private float initMovSpeed;
 
     private bool secondFragment = false;
-
     private bool isGrounded = true;
+    private bool goInCave = false;
 
     public bool SecondFragment { get => secondFragment; set => secondFragment = value; }
     public int CurrentHP { get => currentHP; set => currentHP = value; }
     public int MaxHP { get => maxHP; set => maxHP = value; }
+    public bool GoInCave { get => goInCave; set => goInCave = value; }
 
     private void Start()
     {
@@ -56,21 +60,21 @@ public class PlayerController : MonoBehaviour
             hP_Points[2].SetActive(true);
         }
 
-        if (CurrentHP == 2)
+        if (secondFragment && CurrentHP == 2)
         {
             hP_Points[0].SetActive(false);
             hP_Points[1].SetActive(true);
             hP_Points[2].SetActive(true);
         }
 
-        if (CurrentHP == 1)
+        if (secondFragment && CurrentHP == 1)
         {
             hP_Points[0].SetActive(false);
             hP_Points[1].SetActive(false);
             hP_Points[2].SetActive(true);
         }
 
-        if (CurrentHP == 0)
+        if (secondFragment && CurrentHP == 0)
         {
             hP_Points[0].SetActive(false);
             hP_Points[1].SetActive(false);
@@ -95,16 +99,17 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //Gravity
+        if (GoInCave)
+        {
+            CaveSFX.enabled = true;
+            OverworldSFX.enabled = false;
+        }
+        else
+        {
+            OverworldSFX.enabled = true;
+            CaveSFX.enabled = false;
+        }
 
-        //if (isGrounded)
-        //{
-        //    speedY = 0;
-        //}
-        //else
-        //{ 
-        //    speedY -= gravity * Time.deltaTime;
-        //}
 
         //Move
 

@@ -12,6 +12,13 @@ public class TpPlayer : MonoBehaviour
     [SerializeField] Transform destination;
     [SerializeField] string sceneToLoad;
 
+    private PlayerController player;
+
+    private void Awake()
+    {
+        player = FindObjectOfType<PlayerController>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -19,6 +26,14 @@ public class TpPlayer : MonoBehaviour
             if (thisType == tpType.tpTransform)
             {
                 collision.transform.position = destination.position;
+                if (player.GoInCave)
+                {
+                    player.GoInCave = false;
+                }
+                else
+                {
+                    player.GoInCave = true;
+                }
             }
 
             if (thisType == tpType.tpScene)
