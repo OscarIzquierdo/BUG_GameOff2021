@@ -17,9 +17,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject lastCheckpoint;
     [Header("Interface")]
     [SerializeField] GameObject[] hP_Points;
-    [Header("Audios")]
+    [Header("AudioSource")]
     [SerializeField] AudioSource OverworldSFX;
     [SerializeField] AudioSource CaveSFX;
+    [Header("AudioClip")]
+    [SerializeField] AudioClip[] steps;
+
 
     private Rigidbody2D rb2D;
     private GameObject swordHitBox;
@@ -190,6 +193,12 @@ public class PlayerController : MonoBehaviour
         transform.position = lastCheckpoint.transform.position;
         CurrentHP = MaxHP;
         movSpeed = initMovSpeed;
+    }
+
+    public void PlayStepSound()
+    {
+        GetComponent<AudioSource>().clip = steps[Random.Range(0, steps.Length)];
+        GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
