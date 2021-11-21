@@ -279,11 +279,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5186007974761974003, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
         type: 3}
-      propertyPath: steps.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5186007974761974003, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
-        type: 3}
       propertyPath: hP_Points.Array.data[0]
       value: 
       objectReference: {fileID: 894196967}
@@ -297,21 +292,6 @@ PrefabInstance:
       propertyPath: hP_Points.Array.data[2]
       value: 
       objectReference: {fileID: 894196965}
-    - target: {fileID: 5186007974761974003, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
-        type: 3}
-      propertyPath: steps.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: ab73c69b22273344aa78ff1b2b232b50, type: 3}
-    - target: {fileID: 5186007974761974003, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
-        type: 3}
-      propertyPath: steps.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: ab73c69b22273344aa78ff1b2b232b50, type: 3}
-    - target: {fileID: 5186007974761974003, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
-        type: 3}
-      propertyPath: steps.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2ea39d1f6fd8c104a98855c8ec31388a, type: 3}
     - target: {fileID: 5186007974761974009, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
         type: 3}
       propertyPath: m_Name
