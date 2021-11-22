@@ -279,6 +279,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5186007974761974003, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
         type: 3}
+      propertyPath: sword.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5186007974761974003, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
+        type: 3}
       propertyPath: hP_Points.Array.data[0]
       value: 
       objectReference: {fileID: 894196967}
@@ -292,6 +297,16 @@ PrefabInstance:
       propertyPath: hP_Points.Array.data[2]
       value: 
       objectReference: {fileID: 894196965}
+    - target: {fileID: 5186007974761974003, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
+        type: 3}
+      propertyPath: sword.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 94bde64d2dd0cee4f9cdde4333a20bab, type: 3}
+    - target: {fileID: 5186007974761974003, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
+        type: 3}
+      propertyPath: sword.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: fb4ebe152d3607a4587680ca36d2ef98, type: 3}
     - target: {fileID: 5186007974761974009, guid: 79dcb39f33cbefa4bac51d2b28d3cee9,
         type: 3}
       propertyPath: m_Name
@@ -9305,7 +9320,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7776026, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -10070,6 +10085,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8910100419684837927, guid: 2760f7424e64e7848beca4c616810e51,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8910100419684837944, guid: 2760f7424e64e7848beca4c616810e51,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioSource CaveSFX;
     [Header("AudioClip")]
     [SerializeField] AudioClip[] steps;
+    [SerializeField] AudioClip[] sword;
 
 
     private Rigidbody2D rb2D;
@@ -198,6 +199,12 @@ public class PlayerController : MonoBehaviour
     public void PlayStepSound()
     {
         GetComponent<AudioSource>().clip = steps[Random.Range(0, steps.Length)];
+        GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
+    }
+
+    public void PlaySwordSFX()
+    {
+        GetComponent<AudioSource>().clip = sword[Random.Range(0, sword.Length)];
         GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
     }
 
