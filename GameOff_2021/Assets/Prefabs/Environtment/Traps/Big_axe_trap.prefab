@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapType: 0
-  axeSpeed: 20
+  axeSpeed: 30
   rotationPoint: {fileID: 5763580033494850533}
   rotationTargetLeft: {fileID: 6894786369268135534}
   rotationTargetRight: {fileID: 243558782299061889}
@@ -135,7 +135,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4626687176344407314}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -60}
 --- !u!1 &3989672628474155022
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,7 +198,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4626687176344407314}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 60}
 --- !u!1 &5175219717375790019
 GameObject:
   m_ObjectHideFlags: 0
