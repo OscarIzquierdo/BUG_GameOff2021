@@ -8006,11 +8006,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chest
       objectReference: {fileID: 0}
-    - target: {fileID: 8067211839851376008, guid: b08948cbf614a1047bb0d1aa26fa20cb,
-        type: 3}
-      propertyPath: m_TagString
-      value: Chest
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b08948cbf614a1047bb0d1aa26fa20cb, type: 3}
 --- !u!1 &1062426314
@@ -9377,11 +9372,6 @@ PrefabInstance:
     - target: {fileID: 7299180233640142298, guid: 4bfd5a34f26cca34ca53707000e06288,
         type: 3}
       propertyPath: m_Name
-      value: Key
-      objectReference: {fileID: 0}
-    - target: {fileID: 7299180233640142298, guid: 4bfd5a34f26cca34ca53707000e06288,
-        type: 3}
-      propertyPath: m_TagString
       value: Key
       objectReference: {fileID: 0}
     - target: {fileID: 7372554003303915608, guid: 4bfd5a34f26cca34ca53707000e06288,

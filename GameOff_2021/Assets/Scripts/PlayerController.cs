@@ -171,17 +171,6 @@ public class PlayerController : MonoBehaviour
             jumpCount = jumpMax;
             isGrounded = true;
         }
-
-        if (collision.gameObject.tag == "Player" && !HasKey)
-        {
-            HasKey = true;
-            Destroy(collision.gameObject, 0.01f);
-        }
-
-        if (collision.gameObject.tag == "Chest" && HasKey)
-        {
-            collision.gameObject.GetComponent<Chest>().Open(); 
-        }
     }
 
     public void EndAttackAnimation()
@@ -230,6 +219,17 @@ public class PlayerController : MonoBehaviour
         {
             lastCheckpoint = collision.gameObject;
             lastCheckpoint.GetComponentInChildren<Animator>().SetTrigger("Checked");
+        }
+
+        if (collision.tag == "Key" && !HasKey)
+        {
+            HasKey = true;
+            Destroy(collision.gameObject, 0.01f);
+        }
+
+        if (collision.tag == "Chest" && HasKey)
+        {
+            collision.GetComponent<Chest>().Open();
         }
     }
 }
