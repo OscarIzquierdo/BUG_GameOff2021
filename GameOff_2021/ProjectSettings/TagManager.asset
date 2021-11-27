@@ -9,6 +9,8 @@ TagManager:
   - PlayerTakeDamage
   - Sword
   - CheckPoint
+  - Chest
+  - Key
   layers:
   - Default
   - TransparentFX
