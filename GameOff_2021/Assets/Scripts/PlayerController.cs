@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [Header("AudioClip")]
     [SerializeField] AudioClip[] steps;
     [SerializeField] AudioClip[] sword;
+    [Header ("Orbs")]
+    [SerializeField] GameObject[] orbs;
 
 
     private Rigidbody2D rb2D;
@@ -37,11 +39,14 @@ public class PlayerController : MonoBehaviour
     private bool secondFragment = false;
     private bool isGrounded = true;
     private bool goInCave = false;
+    private bool hasKey = false;
+    private bool allOrbsAchieved = false;
 
     public bool SecondFragment { get => secondFragment; set => secondFragment = value; }
     public int CurrentHP { get => currentHP; set => currentHP = value; }
     public int MaxHP { get => maxHP; set => maxHP = value; }
     public bool GoInCave { get => goInCave; set => goInCave = value; }
+    public bool HasKey { get => hasKey; set => hasKey = value; }
 
     private void Start()
     {
@@ -114,7 +119,6 @@ public class PlayerController : MonoBehaviour
             CaveSFX.enabled = false;
         }
 
-
         //Move
 
         float inputX = Input.GetAxisRaw("Horizontal");
@@ -153,10 +157,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //Attack
-            //swordHitBox = Instantiate(swordHitBoxPrefab, swordHitBoxSpawn.transform.position,Quaternion.identity);
             swordHitBoxPrefab.SetActive(true);
             GetComponent<Animator>().SetBool("Attack", true);
             movSpeed = 0;
+        }
+
+        if (orbs[0] != null && orbs[1] != null && orbs[2] != null)
+        {
+            allOrbsAchieved = true;
         }
     }
 
@@ -169,8 +177,6 @@ public class PlayerController : MonoBehaviour
             jumpCount = jumpMax;
             isGrounded = true;
         }
-
-
     }
 
     public void EndAttackAnimation()
@@ -219,6 +225,33 @@ public class PlayerController : MonoBehaviour
         {
             lastCheckpoint = collision.gameObject;
             lastCheckpoint.GetComponentInChildren<Animator>().SetTrigger("Checked");
+        }
+
+        if (collision.tag == "Key" && !HasKey)
+        {
+            HasKey = true;
+            Destroy(collision.gameObject, 0.01f);
+        }
+
+        if (collision.tag == "Chest" && HasKey)
+        {
+            collision.GetComponent<Chest>().Open();
+        }
+
+        if (collision.tag == "Orb")
+        {
+            if (orbs[0] == null)
+            {
+                orbs[0] = collision.gameObject;
+            }
+            else if (orbs[1] == null)
+            {
+                orbs[1] = collision.gameObject;
+            }
+            else if (orbs[2] == null)
+            {
+                orbs[2] = collision.gameObject;
+            }
         }
     }
 }

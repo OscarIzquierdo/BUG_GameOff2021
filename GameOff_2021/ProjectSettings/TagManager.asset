@@ -9,6 +9,9 @@ TagManager:
   - PlayerTakeDamage
   - Sword
   - CheckPoint
+  - Chest
+  - Key
+  - Orb
   layers:
   - Default
   - TransparentFX
@@ -23,8 +26,8 @@ TagManager:
   - Enemy
   - Sword
   - EnemyAttack
-  - 
-  - 
+  - Interactable
+  - Wall
   - 
   - 
   - 
