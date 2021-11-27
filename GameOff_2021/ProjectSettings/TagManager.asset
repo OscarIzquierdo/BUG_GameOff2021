@@ -11,6 +11,7 @@ TagManager:
   - CheckPoint
   - Chest
   - Key
+  - Orb
   layers:
   - Default
   - TransparentFX

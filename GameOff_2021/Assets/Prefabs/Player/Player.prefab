@@ -439,6 +439,10 @@ MonoBehaviour:
   sword:
   - {fileID: 8300000, guid: 94bde64d2dd0cee4f9cdde4333a20bab, type: 3}
   - {fileID: 8300000, guid: fb4ebe152d3607a4587680ca36d2ef98, type: 3}
+  orbs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!82 &5688999222322821543
 AudioSource:
   m_ObjectHideFlags: 0

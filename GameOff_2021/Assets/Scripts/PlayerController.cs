@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [Header("AudioClip")]
     [SerializeField] AudioClip[] steps;
     [SerializeField] AudioClip[] sword;
+    [Header ("Orbs")]
+    [SerializeField] GameObject[] orbs;
 
 
     private Rigidbody2D rb2D;
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = true;
     private bool goInCave = false;
     private bool hasKey = false;
+    private bool allOrbsAchieved = false;
 
     public bool SecondFragment { get => secondFragment; set => secondFragment = value; }
     public int CurrentHP { get => currentHP; set => currentHP = value; }
@@ -116,7 +119,6 @@ public class PlayerController : MonoBehaviour
             CaveSFX.enabled = false;
         }
 
-
         //Move
 
         float inputX = Input.GetAxisRaw("Horizontal");
@@ -155,10 +157,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //Attack
-            //swordHitBox = Instantiate(swordHitBoxPrefab, swordHitBoxSpawn.transform.position,Quaternion.identity);
             swordHitBoxPrefab.SetActive(true);
             GetComponent<Animator>().SetBool("Attack", true);
             movSpeed = 0;
+        }
+
+        if (orbs[0] != null && orbs[1] != null && orbs[2] != null)
+        {
+            allOrbsAchieved = true;
         }
     }
 
@@ -230,6 +236,22 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "Chest" && HasKey)
         {
             collision.GetComponent<Chest>().Open();
+        }
+
+        if (collision.tag == "Orb")
+        {
+            if (orbs[0] == null)
+            {
+                orbs[0] = collision.gameObject;
+            }
+            else if (orbs[1] == null)
+            {
+                orbs[1] = collision.gameObject;
+            }
+            else if (orbs[2] == null)
+            {
+                orbs[2] = collision.gameObject;
+            }
         }
     }
 }
