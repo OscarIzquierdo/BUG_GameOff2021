@@ -247,6 +247,7 @@ public class PlayerController : MonoBehaviour
             else if (orbs[1] == null)
             {
                 orbs[1] = collision.gameObject;
+                SecondFragment = true;
             }
             else if (orbs[2] == null)
             {
