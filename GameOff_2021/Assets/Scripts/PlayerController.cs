@@ -37,11 +37,13 @@ public class PlayerController : MonoBehaviour
     private bool secondFragment = false;
     private bool isGrounded = true;
     private bool goInCave = false;
+    private bool hasKey = false;
 
     public bool SecondFragment { get => secondFragment; set => secondFragment = value; }
     public int CurrentHP { get => currentHP; set => currentHP = value; }
     public int MaxHP { get => maxHP; set => maxHP = value; }
     public bool GoInCave { get => goInCave; set => goInCave = value; }
+    public bool HasKey { get => hasKey; set => hasKey = value; }
 
     private void Start()
     {
@@ -169,8 +171,6 @@ public class PlayerController : MonoBehaviour
             jumpCount = jumpMax;
             isGrounded = true;
         }
-
-
     }
 
     public void EndAttackAnimation()
@@ -219,6 +219,17 @@ public class PlayerController : MonoBehaviour
         {
             lastCheckpoint = collision.gameObject;
             lastCheckpoint.GetComponentInChildren<Animator>().SetTrigger("Checked");
+        }
+
+        if (collision.tag == "Key" && !HasKey)
+        {
+            HasKey = true;
+            Destroy(collision.gameObject, 0.01f);
+        }
+
+        if (collision.tag == "Chest" && HasKey)
+        {
+            collision.GetComponent<Chest>().Open();
         }
     }
 }

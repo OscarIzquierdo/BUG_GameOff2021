@@ -436,6 +436,9 @@ MonoBehaviour:
   steps:
   - {fileID: 8300000, guid: 2ea39d1f6fd8c104a98855c8ec31388a, type: 3}
   - {fileID: 8300000, guid: ab73c69b22273344aa78ff1b2b232b50, type: 3}
+  sword:
+  - {fileID: 8300000, guid: 94bde64d2dd0cee4f9cdde4333a20bab, type: 3}
+  - {fileID: 8300000, guid: fb4ebe152d3607a4587680ca36d2ef98, type: 3}
 --- !u!82 &5688999222322821543
 AudioSource:
   m_ObjectHideFlags: 0
