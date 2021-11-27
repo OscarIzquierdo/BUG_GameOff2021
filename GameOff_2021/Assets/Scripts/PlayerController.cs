@@ -37,11 +37,13 @@ public class PlayerController : MonoBehaviour
     private bool secondFragment = false;
     private bool isGrounded = true;
     private bool goInCave = false;
+    private bool hasKey = false;
 
     public bool SecondFragment { get => secondFragment; set => secondFragment = value; }
     public int CurrentHP { get => currentHP; set => currentHP = value; }
     public int MaxHP { get => maxHP; set => maxHP = value; }
     public bool GoInCave { get => goInCave; set => goInCave = value; }
+    public bool HasKey { get => hasKey; set => hasKey = value; }
 
     private void Start()
     {
@@ -170,7 +172,16 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
         }
 
+        if (collision.gameObject.tag == "Player" && !HasKey)
+        {
+            HasKey = true;
+            Destroy(collision.gameObject, 0.01f);
+        }
 
+        if (collision.gameObject.tag == "Chest" && HasKey)
+        {
+            collision.gameObject.GetComponent<Chest>().Open(); 
+        }
     }
 
     public void EndAttackAnimation()
